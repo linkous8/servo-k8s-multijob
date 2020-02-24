@@ -478,13 +478,13 @@ def run_watch(v, p_line):
             break
         for h in r:
             if h is proc.stderr:
-                l = h.read(4096) # nosec (l as in line)
+                l = h.read(4096) # noqa: E741 (l as in line)
                 if not l:
                     eof_stderr = True
                     continue
                 stderr.append(l)
             else: # h is proc.stdout
-                l = h.readline() # nosec (l as in line)
+                l = h.readline() # noqa: E741 (l as in line)
                 if not l:
                     eof_stdout = True
                     continue
@@ -502,7 +502,7 @@ def run_watch(v, p_line):
                 if v is None: return 1, v # failure - return to trigger a new 'get' of all pods
         if w:
             # write with select.PIPE_BUF bytes or less should not block
-            l = min(getattr(select,'PIPE_BUF',512), len(stdin)) # nosec (l as in line)
+            l = min(getattr(select,'PIPE_BUF',512), len(stdin)) # noqa: E741 (l as in line)
             if not l: # done sending stdin
                 proc.stdin.close()
                 wi = []
